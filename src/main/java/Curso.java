@@ -33,5 +33,9 @@ public class Curso {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+    //a representação textual de Curso: sobrescrever o toString
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

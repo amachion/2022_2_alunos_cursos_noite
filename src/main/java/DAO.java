@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 public class DAO {
     public boolean existeUsuario (Usuario usuario) throws Exception {
         String sql = "SELECT * FROM tb_usuario WHERE nome = ? AND senha = ?";
@@ -16,15 +15,16 @@ public class DAO {
             }
         }
     }
-    public Curso[] obtemCursos () throws Exception {
+    public Curso[] obterCursos () throws Exception {
         String sql = "SELECT * FROM tb_curso";
         try (Connection conn = ConexaoBD.obtemConexao();
              PreparedStatement ps = conn.prepareStatement(
-             sql, ResultSet.CONCUR_READ_ONLY, 
-                  ResultSet.TYPE_SCROLL_INSENSITIVE)) {
-            ResultSet rs = ps.executeQuery();
+             sql, ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                  ResultSet.CONCUR_READ_ONLY);
+                  ResultSet rs = ps.executeQuery()){
             int totalCursos = rs.last()? rs.getRow(): 0;
             Curso[] cursos = new Curso[totalCursos];
+            rs.beforeFirst();
             int cont = 0;
             while (rs.next()) {
                 int id = rs.getInt("id");
