@@ -66,6 +66,11 @@ public class CursosTela extends javax.swing.JFrame {
         cancelarCursoButton.setText("Cancelar");
 
         mostrarAlunosButton.setText("Mostrar Alunos");
+        mostrarAlunosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarAlunosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cursosPanelLayout = new javax.swing.GroupLayout(cursosPanel);
         cursosPanel.setLayout(cursosPanelLayout);
@@ -137,6 +142,16 @@ public class CursosTela extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mostrarAlunosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAlunosButtonActionPerformed
+        int idCurso = Integer.parseInt(idCursoTextField.getText());
+        String nomeCurso = nomeCursoTextField.getText();
+        String tipoCurso = tipoCursoTextField.getText();
+        Curso curso = new Curso (idCurso, nomeCurso, tipoCurso);
+        mostraAlunosCursoTela ac = new mostraAlunosCursoTela(curso);
+        ac.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mostrarAlunosButtonActionPerformed
 
     /**
      * @param args the command line arguments
